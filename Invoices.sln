@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invoices.Web", "Invoices.Web\Invoices.Web.csproj", "{068B38D8-87D9-4180-8B83-35D7A143CB5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invoices.Models", "Invoices.Models\Invoices.Models.csproj", "{3FFDA072-FDDB-4820-B13F-706C291A4B23}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{068B38D8-87D9-4180-8B83-35D7A143CB5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{068B38D8-87D9-4180-8B83-35D7A143CB5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{068B38D8-87D9-4180-8B83-35D7A143CB5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{068B38D8-87D9-4180-8B83-35D7A143CB5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FFDA072-FDDB-4820-B13F-706C291A4B23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FFDA072-FDDB-4820-B13F-706C291A4B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FFDA072-FDDB-4820-B13F-706C291A4B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FFDA072-FDDB-4820-B13F-706C291A4B23}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {58788E2F-929D-4336-BC3C-0284C684DD27}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,89 @@
+﻿@model Invoices.Web.ViewModels.InvoiceCreateViewModel
+@{
+    ViewData["Title"] = "Invoice";
+}
+
+<h1>Create invoice</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <form method="post" asp-controller="Invoice" asp-action="Save">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Recipient name</label>
+                <input asp-for="RecipientName" class="form-control" />
+                <span asp-validation-for="RecipientName" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Items" class="control-label"></label><br />
+                    <select asp-items="@Model.Items" name="Items" class="form-control">
+                        <option value="Select product">Select product</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="control-label">Quantity</label>
+                    <input asp-for="QuantitySold" class="form-control" />
+                    <span asp-validation-for="QuantitySold" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="control-label"></label>
+                    <button id="addItem" type="button" class="btn btn-primary form-control"
+                            style="margin-top:7px">
+                        Add
+                    </button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Taxes" class="control-label"></label><br />
+                <select asp-items="@Model.Taxes" asp-for="@Model.Tax" class="form-control">
+                    <option value="Select product">Select tax</option>
+                </select>
+            </div>
+
+            <div class="row" id="items" style="border:1px solid black; min-height:200px;padding:5px">
+
+            </div>
+            <br />
+
+            <div class="form-group col-md-4">
+                <label class="control-label">Current price</label>
+                <input id="currentPrice" readonly class="form-control" value="0" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    let idx = 0;
+    $(document).ready(function () {
+        $("#addItem").click(function () {
+            var quantity = $("input[name=QuantitySold]").val();
+            var itemId = $("select[name=Items]").val();
+            var itemText = $(`select[name=Items] option[value=${itemId}]`).text();
+            var itemPrice = $(`select[name=Items] option[value=${itemId}]`).text();
+
+            var priceInput = parseInt($("#currentPrice").val());
+            priceInput += (parseInt(quantity) * parseInt(itemPrice.slice(itemPrice.length - 2)));
+            $("#currentPrice").attr('value', priceInput.toString());
+
+            $("#items").append(`
+                <div class="col-md-4" id="${itemId}" style="border:1px solid black;border-radius:5px;
+                    height:2rem">
+                      ${itemText} - Quantity: ${quantity}
+                    <span class="btn btn-primary"
+                            style="border:1px solid black;border-radius:5px;width:20px;cursor:pointer;
+                        height:inherit;display: inline-block;
+                            text-align: center;background-color: coral;"
+                        onclick="$('#${itemId}').remove()">-</span>
+                    <input type="hidden" name="SelectedItems[${idx}][Id]" value="${itemId}"/>
+                    <input type="hidden" name="SelectedItems[${idx++}][Quantity]" value="${quantity}"/>
+                </div>
+            `)
+        })
+    });
+</script>
+

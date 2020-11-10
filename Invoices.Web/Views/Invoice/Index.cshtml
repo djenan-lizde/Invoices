@@ -1,0 +1,72 @@
+﻿@model List<Invoices.Web.ViewModels.InvoiceOutputViewModel>
+@{
+    ViewData["Title"] = "User invoices";
+    var counter = 1;
+}
+
+<h1>User invoices</h1>
+<br />
+<br />
+
+@if (!Model.Any())
+{
+    <p>You don't have any invoices</p>
+}
+else
+{
+    @foreach (var item in Model)
+    {
+        <h3>#@(counter++)</h3>
+        <br />
+        <div class="row">
+            <div style="float:left;width:33%;text-align:center;">
+                <strong>Invoice number:</strong> @item.InvoiceNumber
+            </div>
+            <div style="float:left;width:33%;text-align:center;">
+                <strong>Creation date:</strong> @item.DateCreation
+            </div>
+            <div style="float:left;width:33%;text-align:center;">
+                <strong>Payment date:</strong> @item.PaymentDate
+            </div>
+            <br />
+            <br />
+            <table class="table table-hover" style="text-align:center">
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Item price</th>
+                        <th>Quantity sold</th>
+                        <th>Charged price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var invoiceItem in item.InvoiceItems)
+                    {
+                        <tr>
+                            <td>@invoiceItem.Description</td>
+                            <td>@invoiceItem.ItemPrice</td>
+                            <td>@invoiceItem.QuantitySold</td>
+                            <td>@invoiceItem.ItemChargePrice</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div style="float:left;width:25%;text-align:center;">
+                <strong>Sender: </strong> @item.User
+            </div>
+            <div style="float:left;width:25%;text-align:center;">
+                <strong>Recipient name: </strong>@(string.IsNullOrWhiteSpace(item.RecipientName)?"N/A": item.RecipientName)
+            </div>
+            <div style="float:left;width:25%;text-align:center;">
+                <strong>Total price without tax: </strong> @item.TotalPriceWOTax
+            </div>
+            <div style="float:left;width:25%;text-align:center;">
+                <strong>Total price with tax: </strong> @item.TotalPriceWithTax
+            </div>
+        </div>
+        <hr />
+        <br />
+        <br />
+        <br />
+    }
+}
